@@ -15,10 +15,21 @@
 ### About
 
 - I build products end to end: **React / Next.js** front ends, **Python** and **Node** back ends, shipped on **Vercel** and **Firebase**.
-- Currently exploring **multi-agent systems, game theory, retrieval-augmented generation** and **applied deep learning**.
+- Currently exploring **computer vision for pathology, multi-agent systems, game theory, retrieval-augmented generation** and **applied deep learning**.
 - I care about correctness you can prove: deterministic simulations, exact arithmetic and test suites that fail loudly.
 
 ### Featured work
+
+#### 🔬 [AI Pathologist](https://github.com/Divvij0202/ai-pathologist) · OpenCV AI Competition 2026
+
+An agent that reads gigapixel lymph-node slides the way a pathologist does: it surveys the slide at low zoom, zooms in only where the tissue looks suspicious, follows tumour to its edges and stops when it has enough evidence.
+
+- **OpenCV 5** does all the pixel work: tissue detection (HSV, Otsu, morphology, contours), Reinhard and Macenko stain normalisation, lesion measurement with `minAreaRect`, and the ONNX tile classifier through `cv.dnn`
+- ResNet-18 tile classifier trained on PatchCamelyon (262k training patches) and temperature-calibrated: **0.958 test AUC**; on a held-out slide it found all 4 macrometastases while viewing **8% of the tissue**
+- Slides stream from the public CAMELYON16 bucket on S3 by HTTP range reads, so a 3 GB slide is never downloaded; Claude on Amazon Bedrock chooses the search strategy, while the look budget and safety rules live in code
+- Research prototype and second reader only, not a diagnostic tool
+
+`Python` `OpenCV 5` `PyTorch` `ONNX` `Claude / Bedrock` `FastAPI`
 
 #### ⚖️ [Saul Goodman Courtroom](https://github.com/Divvij0202/saul-goodman-courtroom) · [live demo](https://saul-goodman-courtroom.vercel.app)
 
